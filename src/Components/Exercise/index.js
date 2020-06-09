@@ -21,7 +21,7 @@ export default ({
     description = "Please select an exercise from the left panel.",
   },
   exercises,
-  handleExerciseSelected,
+  onSelect,
 }) => (
   <Grid container>
     <Grid item sm>
@@ -34,11 +34,8 @@ export default ({
               </Typography>
               <List component="ul">
                 {exercises.map(({ id, title }) => (
-                  <ListItem button key={id}>
-                    <ListItemText
-                      primary={title}
-                      onClick={handleExerciseSelected}
-                    />
+                  <ListItem button key={id} onClick={() => onSelect(id)}>
+                    <ListItemText primary={title} />
                   </ListItem>
                 ))}
               </List>
