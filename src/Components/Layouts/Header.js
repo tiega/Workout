@@ -1,16 +1,15 @@
 import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography
-} from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 
-export default props => (
+import Create from "../Exercise/Dialogs/Create";
+
+export default (props) => (
   <AppBar position="static">
     <Toolbar>
-      <Typography variant="h4" color="inherit" >
+      <Typography variant="h4" color="inherit" style={{ flex: 1 }}>
         Exercise Database
       </Typography>
+      <Create />
     </Toolbar>
   </AppBar>
 );
