@@ -1,4 +1,4 @@
-export const muscles = ["shoulders", "chest", "arms", "back", "legs"];
+export const muscleGroups = ["shoulders", "chest", "arms", "back", "legs"];
 
 export const exercises = [
   {
@@ -72,5 +72,5 @@ export const exercises = [
     title: "Close Stance Squats",
     description: "Legs exercise ...",
     muscles: "legs",
-  }
+  },
 ];

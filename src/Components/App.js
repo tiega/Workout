@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Header, Footer } from "./Layouts";
 import Exercise from "./Exercise";
-import { muscles, exercises } from "./../store.js";
+import { muscleGroups, exercises } from "./../store.js";
 
 export default class extends Component {
   state = {
@@ -21,35 +21,44 @@ export default class extends Component {
     );
   }
 
-  handleCategorySelected = category => {
-    this.setState({category})
-  }
+  handleCategorySelected = (category) => {
+    this.setState({ category });
+  };
 
-  handleExerciseSelected = id => {
+  handleExerciseSelected = (id) => {
     this.setState(({ exercises }) => ({
-      exercise: exercises.find(ex => ex.id === id)
-    }))
-  }
+      exercise: exercises.find((ex) => ex.id === id),
+    }));
+  };
+
+  handleExerciseCreate = (exercise) => {
+    this.setState(({ exercises }) => ({
+      exercises: [...exercises, exercise],
+    }));
+  };
 
   render() {
-    const exercises = this.getExercisesByMuscle()
-    const { category, exercise } = this.state
+    const exercises = this.getExercisesByMuscle();
+    const { category, exercise } = this.state;
 
     return (
       <Fragment>
-        <Header />
+        <Header
+          muscleGroups={muscleGroups}
+          handleExerciseCreate={this.handleExerciseCreate}
+        />
 
-        <Exercise 
+        <Exercise
           category={category}
           exercise={exercise}
-          exercises={exercises} 
+          exercises={exercises}
           onSelect={this.handleExerciseSelected}
         />
 
-        <Footer 
+        <Footer
           category={category}
-          muscles={muscles} 
-          onSelect={this.handleCategorySelected} 
+          muscleGroups={muscleGroups}
+          onSelect={this.handleCategorySelected}
         />
       </Fragment>
     );
