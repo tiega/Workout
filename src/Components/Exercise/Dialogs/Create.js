@@ -11,42 +11,69 @@ import AddIcon from "@material-ui/icons/Add";
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
+  const [exercise, setExercise] = React.useState({
+    title: "",
+    description: "",
+    muscle: "",
+  });
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  let { title, description, muscle } = exercise;
+
+  const handleToggle = () => {
+    setOpen(!open);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleChange = (name) => (e) => {
+    setExercise({
+      ...exercise,
+      [name]: e.target.value,
+    });
   };
 
   return (
     <Fragment>
-      <IconButton aria-label="add" onClick={handleClickOpen}>
+      <IconButton aria-label="add" onClick={handleToggle}>
         <AddIcon />
       </IconButton>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={handleToggle}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Create New Exercise</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          Please fill out the form below
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>Content</DialogContentText>
           <TextField
             autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
+            margin="normal"
+            label="Title"
+            onChange={handleChange("title")}
+            value={title}
+          />
+          <br />
+          <TextField
+            margin="normal"
+            label="Description"
+            multiline
+            rows={2}
+            onChange={handleChange("description")}
+            value={description}
+          />
+          <br />
+          <TextField
+            margin="normal"
+            label="Muscle"
+            onChange={handleChange("muscle")}
+            value={muscle}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleToggle} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleToggle} color="primary">
             Create
           </Button>
         </DialogActions>
