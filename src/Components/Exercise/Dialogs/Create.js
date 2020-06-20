@@ -44,8 +44,20 @@ export default function FormDialog({ muscleGroups, onExerciseCreate }) {
 
   const handleSubmit = () => {
     // TODO: validate the form before submission
-    onExerciseCreate({ title, description, muscles });
+    onExerciseCreate({
+      ...exercise,
+      id: exercise.title.trim().toLowerCase().replace(/ /g, "-"),
+    });
+
+    // Close dialog
     handleToggle();
+
+    // Clear exercise state
+    setExercise({
+      title: "",
+      description: "",
+      muscles: "",
+    });
   };
 
   return (
@@ -82,7 +94,9 @@ export default function FormDialog({ muscleGroups, onExerciseCreate }) {
               className={classes.FormControl}
             >
               {muscleGroups.map((item) => (
-                <MenuItem value={item}>{item}</MenuItem>
+                <MenuItem key={item} value={item}>
+                  {item}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -101,7 +115,7 @@ export default function FormDialog({ muscleGroups, onExerciseCreate }) {
           <Button onClick={handleToggle} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleToggle} color="primary" onClick={handleSubmit}>
+          <Button color="primary" onClick={handleSubmit}>
             Create
           </Button>
         </DialogActions>
